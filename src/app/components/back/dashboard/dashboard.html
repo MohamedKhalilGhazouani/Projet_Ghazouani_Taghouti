@@ -1,0 +1,84 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+  <h1 class="h4 mb-0">Tableau de bord</h1>
+  <a class="btn btn-success" routerLink="/admin/joueurs/nouveau"><i class="bi bi-plus-lg"></i> Ajouter un joueur</a>
+</div>
+
+@if (erreurServeur()) {
+  <div class="alert alert-danger">Impossible de contacter le serveur JSON (json-server sur le port 3000).</div>
+}
+
+<div class="row g-3 mb-4">
+  <div class="col-6 col-xl-3">
+    <div class="card shadow-sm h-100"><div class="card-body">
+      <div class="text-muted small">Joueurs au catalogue</div>
+      <div class="fs-3 fw-bold">{{ nombre() }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-xl-3">
+    <div class="card shadow-sm h-100"><div class="card-body">
+      <div class="text-muted small">Disponibles / indisponibles</div>
+      <div class="fs-3 fw-bold"><span class="text-success">{{ disponibles() }}</span> <span class="text-muted fs-5">/ {{ indisponibles() }}</span></div>
+    </div></div>
+  </div>
+  <div class="col-6 col-xl-3">
+    <div class="card shadow-sm h-100"><div class="card-body">
+      <div class="text-muted small">Valeur du catalogue</div>
+      <div class="fs-4 fw-bold">{{ valeur() | prixMillion }}</div>
+    </div></div>
+  </div>
+  <div class="col-6 col-xl-3">
+    <div class="card shadow-sm h-100"><div class="card-body">
+      <div class="text-muted small">Indemnité moyenne</div>
+      <div class="fs-4 fw-bold">{{ moyenne() | prixMillion }}</div>
+    </div></div>
+  </div>
+</div>
+
+@if (message()) {
+  <div class="alert alert-success">{{ message() }}</div>
+}
+@if (erreur()) {
+  <div class="alert alert-danger">{{ erreur() }}</div>
+}
+
+<div class="card shadow-sm">
+  <div class="card-header bg-white fw-semibold">
+    <i class="bi bi-key me-1"></i> Modifier le mot de passe ({{ admin()?.login }})
+  </div>
+  <div class="card-body">
+    <form [formRoot]="formulaire" (submit)="changerMotDePasse()" novalidate>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label" for="ancien">Ancien mot de passe *</label>
+          <input id="ancien" type="password" class="form-control" autocomplete="current-password"
+            [formField]="formulaire.ancienMotDePasse"
+            [class.is-invalid]="formulaire.ancienMotDePasse().invalid() && formulaire.ancienMotDePasse().touched()" />
+          @if (formulaire.ancienMotDePasse().invalid() && formulaire.ancienMotDePasse().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.ancienMotDePasse().errors()[0].message }}</div>
+          }
+        </div>
+        <div class="col-md-4">
+          <label class="form-label" for="nouveau">Nouveau mot de passe *</label>
+          <input id="nouveau" type="password" class="form-control" autocomplete="new-password"
+            [formField]="formulaire.nouveauMotDePasse"
+            [class.is-invalid]="formulaire.nouveauMotDePasse().invalid() && formulaire.nouveauMotDePasse().touched()" />
+          @if (formulaire.nouveauMotDePasse().invalid() && formulaire.nouveauMotDePasse().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.nouveauMotDePasse().errors()[0].message }}</div>
+          }
+        </div>
+        <div class="col-md-4">
+          <label class="form-label" for="confirmation">Confirmation *</label>
+          <input id="confirmation" type="password" class="form-control" autocomplete="new-password"
+            [formField]="formulaire.confirmation"
+            [class.is-invalid]="formulaire.confirmation().invalid() && formulaire.confirmation().touched()" />
+          @if (formulaire.confirmation().invalid() && formulaire.confirmation().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.confirmation().errors()[0].message }}</div>
+          }
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success mt-3" [disabled]="enCours() || formulaire().invalid()">
+        <i class="bi bi-check2"></i> Enregistrer
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+body {
+  background-color: #f4f6f5;
+}
+
+.carte-joueur {
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.carte-joueur:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(6, 40, 31, 0.18) !important;
+}
+
+.carte-indisponible {
+  opacity: 0.62;
+  filter: grayscale(0.55);
+}
+
+.joueur-img {
+  height: 230px;
+  object-fit: cover;
+  object-position: top center;
+  background-color: #0d6b4a;
+}
+
+.joueur-img-detail {
+  height: 380px;
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+  background-color: #0d6b4a;
+}
+
+.admin-sidebar {
+  width: 260px;
+  min-width: 260px;
+}
+
+.admin-sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.72);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.admin-sidebar .nav-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.admin-sidebar .nav-link.active {
+  color: #06281f;
+  background-color: #f5b301;
+  font-weight: 600;
+}
+
+.titre-section {
+  border-left: 4px solid #f5b301;
+  padding-left: 0.75rem;
+}

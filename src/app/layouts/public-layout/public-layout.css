@@ -1,0 +1,13 @@
+.navbar .nav-link {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: #ffffff;
+}
+
+.navbar-nav .nav-link.active {
+  color: #f5b301;
+  font-weight: 600;
+}

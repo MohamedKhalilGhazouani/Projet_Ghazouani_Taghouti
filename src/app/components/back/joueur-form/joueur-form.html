@@ -1,0 +1,94 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+  <div>
+    <h1 class="h4 mb-1">{{ modeEdition() ? 'Modifier un joueur' : 'Ajouter un joueur' }}</h1>
+    <p class="text-muted small mb-0">
+      @if (modeEdition()) {
+        Identifiant : <code>{{ idModifie() }}</code> (non modifiable)
+      } @else {
+        L'identifiant sera généré automatiquement.
+      }
+    </p>
+  </div>
+  <a class="btn btn-outline-secondary" routerLink="/admin/joueurs"><i class="bi bi-arrow-left"></i> Retour</a>
+</div>
+
+@if (erreur()) {
+  <div class="alert alert-danger">{{ erreur() }}</div>
+}
+
+<form [formRoot]="formulaire" (submit)="onSubmit()" novalidate>
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white fw-semibold">Fiche du joueur</div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-md-8">
+          <label class="form-label" for="nom">Nom complet *</label>
+          <input id="nom" type="text" class="form-control" [formField]="formulaire.nom"
+            [class.is-invalid]="formulaire.nom().invalid() && formulaire.nom().touched()" />
+          @if (formulaire.nom().invalid() && formulaire.nom().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.nom().errors()[0].message }}</div>
+          }
+        </div>
+        <div class="col-md-4">
+          <label class="form-label" for="poste">Poste *</label>
+          <select id="poste" class="form-select" [formField]="formulaire.poste">
+            @for (poste of postes; track poste) {
+              <option [value]="poste">{{ poste }}</option>
+            }
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="prix">Indemnité (€) *</label>
+          <input id="prix" type="number" class="form-control" [formField]="formulaire.prix"
+            [class.is-invalid]="formulaire.prix().invalid() && formulaire.prix().touched()" />
+          @if (formulaire.prix().invalid() && formulaire.prix().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.prix().errors()[0].message }}</div>
+          }
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="dateFinContrat">Fin de contrat * (Date)</label>
+          <input id="dateFinContrat" type="date" class="form-control" [formField]="formulaire.dateFinContrat"
+            [class.is-invalid]="formulaire.dateFinContrat().invalid() && formulaire.dateFinContrat().touched()" />
+          @if (formulaire.dateFinContrat().invalid() && formulaire.dateFinContrat().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.dateFinContrat().errors()[0].message }}</div>
+          }
+        </div>
+        <div class="col-md-6">
+          <label class="form-label" for="image">Image (URL ou chemin) *</label>
+          <input id="image" type="text" class="form-control" placeholder="https://... ou joueurs/messi.jpg"
+            [formField]="formulaire.image"
+            [class.is-invalid]="formulaire.image().invalid() && formulaire.image().touched()" />
+          @if (formulaire.image().invalid() && formulaire.image().touched()) {
+            <div class="invalid-feedback d-block">{{ formulaire.image().errors()[0].message }}</div>
+          }
+        </div>
+        <div class="col-md-6 d-flex align-items-end">
+          <div class="form-check form-switch mb-2">
+            <input id="disponible" type="checkbox" class="form-check-input" [formField]="formulaire.disponible" />
+            <label class="form-check-label" for="disponible">Disponible au recrutement</label>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3">
+        <label class="form-label" for="description">Description *</label>
+        <textarea id="description" rows="3" class="form-control" [formField]="formulaire.description"
+          [class.is-invalid]="formulaire.description().invalid() && formulaire.description().touched()"></textarea>
+        @if (formulaire.description().invalid() && formulaire.description().touched()) {
+          <div class="invalid-feedback d-block">{{ formulaire.description().errors()[0].message }}</div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-success"
+      [disabled]="enCours() || !donneesChargees() || formulaire().invalid()">
+      @if (enCours()) {
+        <span class="spinner-border spinner-border-sm me-1"></span> Enregistrement...
+      } @else {
+        <i class="bi bi-check2"></i> {{ modeEdition() ? 'Enregistrer' : 'Ajouter le joueur' }}
+      }
+    </button>
+    <a class="btn btn-outline-secondary" routerLink="/admin/joueurs">Annuler</a>
+  </div>
+</form>

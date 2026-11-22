@@ -1,0 +1,56 @@
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+  <h1 class="h4 titre-section mb-0">Catalogue des joueurs</h1>
+  <span class="badge text-bg-dark">{{ joueursFiltres().length }} / {{ joueurs().length }} joueur(s)</span>
+</div>
+
+@if (erreurServeur()) {
+  <div class="alert alert-danger">
+    Impossible de contacter le serveur JSON. Lancez <code>npm run db</code> puis rechargez la page.
+  </div>
+}
+@if (message()) {
+  <div class="alert alert-success">{{ message() }}</div>
+}
+
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <div class="row g-3 align-items-end">
+      <div class="col-12 col-md-4">
+        <label class="form-label small fw-semibold" for="critereNom">Nom du joueur</label>
+        <input id="critereNom" #nomInput type="text" class="form-control" placeholder="Ex : Messi"
+          [value]="nom()" (input)="nom.set(nomInput.value)" />
+      </div>
+      <div class="col-6 col-md-3">
+        <label class="form-label small fw-semibold" for="criterePrix">Prix maximum (€)</label>
+        <input id="criterePrix" #prixInput type="number" class="form-control" placeholder="Ex : 10000000"
+          [value]="prixMax() ?? ''" (input)="changerPrixMax(prixInput.value)" />
+      </div>
+      <div class="col-6 col-md-3">
+        <label class="form-label small fw-semibold" for="criterePoste">Poste</label>
+        <select id="criterePoste" #posteSelect class="form-select" [value]="poste()" (change)="poste.set(posteSelect.value)">
+          <option value="">Tous les postes</option>
+          @for (p of postes(); track p) {
+            <option [value]="p">{{ p }}</option>
+          }
+        </select>
+      </div>
+      <div class="col-12 col-md-2 d-grid">
+        <button type="button" class="btn btn-outline-secondary" (click)="reinitialiser()">
+          <i class="bi bi-arrow-counterclockwise"></i> Réinitialiser
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4">
+  @for (joueur of joueursFiltres(); track joueur.id) {
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+      <app-joueur-card [joueur]="joueur" (acheter)="onAcheter($event)" />
+    </div>
+  } @empty {
+    @if (!erreurServeur()) {
+      <div class="col-12"><div class="alert alert-warning mb-0">Aucun joueur ne correspond à ces critères.</div></div>
+    }
+  }
+</div>

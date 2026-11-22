@@ -1,0 +1,111 @@
+{
+  "joueurs": [
+    {
+      "id": "J001",
+      "nom": "Lionel Messi",
+      "poste": "Attaquant",
+      "prix": 25000000,
+      "image": "joueurs/messi.jpg",
+      "description": "Attaquant argentin, multiple Ballon d'or, il évolue à l'Inter Miami. Vision du jeu, dribble et finition exceptionnels.",
+      "disponible": true,
+      "dateFinContrat": "2028-12-31",
+      "commentaires": [
+        {
+          "nom": "Sami B.",
+          "message": "Une légende du jeu, même à 39 ans."
+        }
+      ]
+    },
+    {
+      "id": "J002",
+      "nom": "Kylian Mbappé",
+      "poste": "Attaquant",
+      "prix": 180000000,
+      "image": "joueurs/mbappe.jpg",
+      "description": "Attaquant français du Real Madrid, champion du monde 2018. Vitesse, percussion et efficacité devant le but.",
+      "disponible": true,
+      "dateFinContrat": "2029-06-30",
+      "commentaires": [
+        {
+          "nom": "Ines M.",
+          "message": "Le joueur le plus rapide du catalogue."
+        },
+        {
+          "nom": "Bilel R.",
+          "message": "Indemnité élevée, mais quel talent."
+        }
+      ]
+    },
+    {
+      "id": "J003",
+      "nom": "Erling Haaland",
+      "poste": "Attaquant",
+      "prix": 200000000,
+      "image": "joueurs/haaland.jpg",
+      "description": "Avant-centre norvégien de Manchester City, redoutable buteur. Puissance, appels en profondeur et jeu de tête.",
+      "disponible": true,
+      "dateFinContrat": "2034-06-30",
+      "commentaires": [
+        {
+          "nom": "Walid T.",
+          "message": "Un buteur machine."
+        }
+      ]
+    },
+    {
+      "id": "J004",
+      "nom": "Jude Bellingham",
+      "poste": "Milieu",
+      "prix": 180000000,
+      "image": "joueurs/bellingham.jpg",
+      "description": "Milieu anglais du Real Madrid, box-to-box complet. Technique, endurance et sens du but.",
+      "disponible": true,
+      "dateFinContrat": "2029-06-30",
+      "commentaires": [
+        {
+          "nom": "Anis K.",
+          "message": "Complet, il peut tout faire au milieu."
+        }
+      ]
+    },
+    {
+      "id": "J005",
+      "nom": "Virgil van Dijk",
+      "poste": "Défenseur",
+      "prix": 30000000,
+      "image": "joueurs/vandijk.jpg",
+      "description": "Défenseur central néerlandais de Liverpool, capitaine et patron de la défense. Jeu aérien et relance.",
+      "disponible": false,
+      "dateFinContrat": "2027-06-30",
+      "commentaires": [
+        {
+          "nom": "Rania S.",
+          "message": "Un patron de défense, déjà transféré."
+        }
+      ]
+    },
+    {
+      "id": "J006",
+      "nom": "Thibaut Courtois",
+      "poste": "Gardien",
+      "prix": 30000000,
+      "image": "joueurs/courtois.jpg",
+      "description": "Gardien belge du Real Madrid. Réflexes, jeu aérien et relance longue.",
+      "disponible": false,
+      "dateFinContrat": "2027-06-30",
+      "commentaires": [
+        {
+          "nom": "Karim D.",
+          "message": "Le meilleur gardien de sa génération."
+        }
+      ]
+    }
+  ],
+  "admins": [
+    {
+      "id": "A1",
+      "login": "admin",
+      "motDePasse": "admin123"
+    }
+  ]
+}
